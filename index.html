@@ -3,65 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification Successful - Roblox Brainbot</title>
+    <title>Order Confirmed | Roblox Brainbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #0a0c10;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            text-align: center;
+            padding: 0;
+            background-color: #020617;
+            font-family: 'Outfit', sans-serif;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid #22c55e;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
-            max-width: 400px;
-        }
-        .icon {
-            font-size: 50px;
-            color: #22c55e;
-            margin-bottom: 20px;
-        }
-        h1 {
-            color: #22c55e;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-        .status-box {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 20px;
-            border: 1px dashed #22c55e;
+        .font-space {
+            font-family: 'Space Grotesk', sans-serif;
         }
     </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@^19.2.3",
+        "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "framer-motion": "https://esm.sh/framer-motion@^12.23.26",
+        "@react-three/fiber": "https://esm.sh/@react-three/fiber@^9.5.0",
+        "@react-three/drei": "https://esm.sh/@react-three/drei@^10.7.7",
+        "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+      }
+    }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <div class="icon">✅</div>
-        <h1>VERIFICATION COMPLETE</h1>
-        <p>Thank you for choosing <b>Roblox Brainbot</b>. Your security status is now verified.</p>
-        
-        <div class="status-box">
-            🎁 Reward Status: IN PROGRESS...
-        </div>
-        
-        <p style="font-size: 12px; margin-top: 20px;">
-            Your Skin will be added to your Roblox account within 5-10 minutes. Please keep this page open.
-        </p>
-    </div>
+    <div id="root"></div>
+
+    <script type="module">
+        import React from 'react';
+        import ReactDOM from 'react-dom/client';
+        import { motion } from 'framer-motion';
+        import { Canvas } from '@react-three/fiber';
+        import { Float, MeshDistortMaterial, Sphere, PerspectiveCamera, Environment } from '@react-three/drei';
+        import { CheckCircle2, Clock, Package, ShoppingBag, Info, UserCheck, XCircle } from 'lucide-react';
+
+        // Soft, Premium 3D Background element
+        const HeroScene = () => {
+          return (
+            React.createElement(React.Fragment, null,
+              React.createElement(PerspectiveCamera, { makeDefault: true, position: [0, 0, 5] }),
+              React.createElement("ambientLight", { intensity: 0.5 }),
+              React.createElement("pointLight", { position: [10, 10, 10], intensity: 1, color: "#059669" }),
+              React.createElement("pointLight", { position: [-10, -10, -10], intensity: 0.5, color: "#0ea5e9" }),
+              
+              React.createElement(Float, { speed: 0.8, rotationIntensity: 0.2, floatIntensity: 0.4 },
+                React.createElement(Sphere, { args: [2, 64, 64], position: [0, 0, 0] },
+                  React.createElement(MeshDistortMaterial, {
+                    color: "#064e3b",
+                    speed: 1,
+                    distort: 0.15,
+                    radius: 1,
+                    roughness: 0.1,
+                    metalness: 0.6,
+                    emissive: "#065f46",
+                    emissiveIntensity: 0.1
+                  })
+                )
+              ),
+              React.createElement(Environment, { preset: "city" })
+            )
+          );
+        };
+
+        const BackgroundEffects = () => (
+          React.createElement("div", { className: "fixed inset-0 pointer-events-none z-0 bg-[#020617]" },
+            React.createElement("div", { className: "absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-emerald-500/5 to-transparent blur-[120px]" }),
+            React.createElement("div", { className: "absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.03)_0%,transparent_70%)]" })
+          )
+        );
+
+        const App = () => {
+          return (
+            React.createElement("div", { className: "relative min-h-screen w-full flex flex-col items-center justify-center bg-slate-950 text-slate-100 p-6 md:p-8 font-sans overflow-x-hidden" },
+              React.createElement(BackgroundEffects, null),
+              
+              React.createElement("div", { className: "fixed inset-0 z-10 opacity-30 pointer-events-none" },
+                React.createElement(Canvas, null,
+                  React.createElement(HeroScene, null)
+                )
+              ),
+
+              React.createElement("main", { className: "relative z-20 w-full max-w-[420px] my-4 sm:my-8" },
+                React.createElement(motion.div, {
+                  initial: { opacity: 0, y: 15 },
+                  animate: { opacity: 1, y: 0 },
+                  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+                  className: "relative bg-[#0a1118]/90 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] px-6 py-8 md:px-10 md:py-10 shadow-2xl"
+                },
+                  React.createElement("div", { className: "flex flex-col items-center text-center mb-6" },
+                    React.createElement("div", { className: "relative mb-4" },
+                      React.createElement("div", { className: "absolute inset-0 bg-emerald-500 blur-2xl opacity-10 rounded-full" }),
+                      React.createElement("div", { className: "relative bg-emerald-500/10 p-3.5 rounded-full border border-emerald-500/20" },
+                        React.createElement(CheckCircle2, { className: "w-9 h-9 text-emerald-400" })
+                      )
+                    ),
+                    React.createElement("h1", { className: "text-2xl font-bold mb-1 tracking-tight" },
+                      "Order ", React.createElement("span", { className: "text-emerald-400" }, "Received")
+                    ),
+                    React.createElement("p", { className: "text-slate-400 text-xs font-medium max-w-[260px]" },
+                      "Your claim for Brainbot rewards is officially in the fulfillment queue."
+                    )
+                  ),
+
+                  React.createElement("div", { className: "mb-5" },
+                    React.createElement("div", { className: "bg-[#042f2e]/40 rounded-3xl p-6 border border-white/5 text-center relative overflow-hidden" },
+                      React.createElement("div", { className: "flex items-center justify-center gap-2 mb-2" },
+                        React.createElement(Clock, { className: "w-3.5 h-3.5 text-emerald-400" }),
+                        React.createElement("span", { className: "text-emerald-400 font-bold uppercase tracking-[0.15em] text-[9px]" }, "Expected Arrival")
+                      ),
+                      React.createElement("div", { className: "text-4xl font-black text-white mb-4 font-space" },
+                        "1-2 ", React.createElement("span", { className: "text-emerald-500 text-3xl italic font-bold" }, "HOURS")
+                      ),
+                      React.createElement("div", { className: "inline-flex items-center gap-2 px-3.5 py-1.5 bg-black/40 border border-white/5 rounded-lg" },
+                        React.createElement("div", { className: "w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" }),
+                        React.createElement("span", { className: "text-[9px] text-slate-300 font-bold uppercase tracking-wide" }, "High Demand Processing")
+                      ),
+                      React.createElement(Package, { className: "absolute bottom-[-10%] right-[-5%] opacity-5 w-20 h-20 -rotate-12" })
+                    )
+                  ),
+
+                  React.createElement("div", { className: "grid grid-cols-2 gap-3 mb-3" },
+                    React.createElement("div", { className: "bg-[#111827]/40 rounded-2xl p-5 border border-white/5 flex flex-col gap-3" },
+                      React.createElement("div", { className: "w-7 h-7 bg-emerald-500/10 border border-emerald-500/30 rounded-lg flex items-center justify-center" },
+                        React.createElement(ShoppingBag, { className: "w-4 h-4 text-emerald-400" })
+                      ),
+                      React.createElement("div", null,
+                        React.createElement("h3", { className: "text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5" }, "Status"),
+                        React.createElement("p", { className: "text-sm font-bold text-white" }, "Confirmed")
+                      )
+                    ),
+                    React.createElement("div", { className: "bg-[#111827]/40 rounded-2xl p-5 border border-white/5 flex flex-col gap-3" },
+                      React.createElement("div", { className: "w-7 h-7 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center" },
+                        React.createElement(UserCheck, { className: "w-4 h-4 text-blue-400" })
+                      ),
+                      React.createElement("div", null,
+                        React.createElement("h3", { className: "text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5" }, "Verification"),
+                        React.createElement("p", { className: "text-sm font-bold text-white" }, "Verified")
+                      )
+                    )
+                  ),
+
+                  React.createElement("div", { className: "bg-white/[0.01] rounded-2xl p-4 border border-white/5 flex gap-3 mb-6" },
+                    React.createElement("div", { className: "bg-emerald-500/10 p-2 rounded-lg h-fit" },
+                      React.createElement(Info, { className: "w-3.5 h-3.5 text-emerald-400" })
+                    ),
+                    React.createElement("div", null,
+                      React.createElement("h4", { className: "text-[11px] font-bold text-slate-200 mb-0.5" }, "Note on Fulfillment"),
+                      React.createElement("p", { className: "text-[10px] text-slate-400 leading-snug font-medium" },
+                        "Due to current high demand, deliveries are being processed sequentially. Your patience is appreciated during this window."
+                      )
+                    )
+                  ),
+
+                  React.createElement("div", { className: "flex flex-col items-center gap-3 pt-5 border-t border-white/5" },
+                    React.createElement("p", { className: "text-[11px] font-bold text-emerald-400/90 flex items-center gap-1.5" },
+                      React.createElement(XCircle, { className: "w-3.5 h-3.5" }),
+                      "It is now safe to close this browser tab."
+                    ),
+                    React.createElement("p", { className: "text-[8px] text-slate-600 font-bold uppercase tracking-[0.2em]" },
+                      "Reference ID: ", React.createElement("span", { className: "text-slate-500" }, "BRB-8821-XP")
+                    )
+                  )
+                ),
+
+                React.createElement("div", { className: "mt-8 mb-4 flex justify-center items-center gap-4 opacity-25" },
+                  React.createElement("img", { src: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg", className: "h-3.5 invert", alt: "Roblox" }),
+                  React.createElement("div", { className: "h-2.5 w-[1px] bg-slate-700" }),
+                  React.createElement("p", { className: "text-[9px] font-bold tracking-[0.25em] uppercase text-slate-400" }, "Brainbot Global Infrastructure")
+                )
+              )
+            )
+          );
+        };
+
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+          const root = ReactDOM.createRoot(rootElement);
+          root.render(React.createElement(React.StrictMode, null, React.createElement(App, null)));
+        }
+    </script>
 </body>
 </html>
